@@ -1,20 +1,17 @@
 package com.nodirverse.albatros.controller;
 
-import com.nodirverse.albatros.entity.TourPackage;
 import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
-import com.nodirverse.albatros.entity.request.TourPackageRequest;
-import com.nodirverse.albatros.entity.response.TourPackageResponse;
+import com.nodirverse.albatros.dto.request.TourPackageRequest;
+import com.nodirverse.albatros.dto.response.TourPackageResponse;
 import com.nodirverse.albatros.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -35,6 +32,13 @@ public class TourController {
         return ResponseEntity.ok(tourPackageService.getAll());
     }
 
+    @GetMapping("/get-page")
+    public ResponseEntity<Map<String, Object>> getTourPage(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "20") int pageSize) {
+        return ResponseEntity.ok(tourPackageService.getTourPage(pageNumber, pageSize));
+    }
+
     @PostMapping("/update-by-id")
     public ResponseEntity<String> updateTourPackage(
             @RequestParam(value = "id") UUID id,
@@ -53,6 +57,8 @@ public class TourController {
                         id, ticketDate,departureCity, country, nights, hotel, place, nutrition, price, transport
                 ));
     }
+
+
 
 
 }

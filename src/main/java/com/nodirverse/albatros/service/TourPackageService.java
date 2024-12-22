@@ -5,18 +5,19 @@ import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
-import com.nodirverse.albatros.entity.request.TourPackageRequest;
-import com.nodirverse.albatros.entity.response.TourPackageResponse;
+import com.nodirverse.albatros.dto.request.TourPackageRequest;
+import com.nodirverse.albatros.dto.response.TourPackageResponse;
 import com.nodirverse.albatros.exception.DataNotFoundException;
 import com.nodirverse.albatros.repository.TourPackageRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -73,5 +74,23 @@ public class TourPackageService {
         }
         tourPackageRepository.save(tourPackage);
         return "Tour package successfully updated!";
+    }
+
+    public Map<String, Object> getTourPage(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        Page<TourPackage> tourPage = tourPackageRepository.findTourPackagesByOrderByTicketDate(pageable);
+        List<TourPackageResponse> tourPackageResponses = new ArrayList<>();
+        for (TourPackage tourPackage : tourPage.getContent()) {
+            tourPackageResponses.add(modelMapper.map(tourPackage, TourPackageResponse.class));
+        }
+        Map<String, Object> responseMap = new LinkedHashMap<>();
+        responseMap.put("pageNumber", tourPage.getNumber() + 1);
+        responseMap.put("totalPages", tourPage.getTotalPages());
+        responseMap.put("totalCount", tourPage.getTotalElements());
+        responseMap.put("pageSize", tourPage.getSize());
+        responseMap.put("hasPreviousPage", tourPage.hasPrevious());
+        responseMap.put("hasNextPage", tourPage.hasNext());
+        responseMap.put("data", tourPackageResponses);
+        return responseMap;
     }
 }
