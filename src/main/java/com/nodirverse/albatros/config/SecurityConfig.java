@@ -1,7 +1,8 @@
 package com.nodirverse.albatros.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nodirverse.albatros.dto.AppErrorDto;
+import com.nodirverse.albatros.entity.dto.AppErrorDto;
+import com.nodirverse.albatros.entity.enums.UserRole;
 import com.nodirverse.albatros.service.jwt.AuthenticationService;
 import com.nodirverse.albatros.service.jwt.JwtFilter;
 import com.nodirverse.albatros.service.jwt.JwtUtil;
@@ -40,9 +41,8 @@ public class SecurityConfig {
             "/v3/api-docs/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
-            "/api/v1/tour/create-tour-package",
-            "/api/v1/tour/get-all",
-            "/api/v1/tour/update-by-id"
+            "/api/v1/auth/**",
+            "/api/v1/notifications/send-code"
     };
 
     @Bean
@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requestConfigurer -> {
                     requestConfigurer
                             .requestMatchers(WHITE_LIST).permitAll()
+                            .requestMatchers("/api/v1/tour").hasRole("ADMIN")
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(

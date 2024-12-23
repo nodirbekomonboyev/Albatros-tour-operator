@@ -2,6 +2,7 @@ package com.nodirverse.albatros.entity;
 
 
 import com.nodirverse.albatros.entity.enums.UserRole;
+import com.nodirverse.albatros.entity.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,10 +24,11 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
     private String password;
-    private String avatar;
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private LocalDate birthday;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new HashSet<>(Set.of(new SimpleGrantedAuthority("ROLE_" + role.name())));

@@ -4,14 +4,13 @@ import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
-import com.nodirverse.albatros.dto.request.TourPackageRequest;
-import com.nodirverse.albatros.dto.response.TourPackageResponse;
+import com.nodirverse.albatros.entity.dto.request.TourPackageRequest;
+import com.nodirverse.albatros.entity.dto.response.TourPackageResponse;
 import com.nodirverse.albatros.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -39,7 +38,7 @@ public class TourController {
         return ResponseEntity.ok(tourPackageService.getTourPage(pageNumber, pageSize));
     }
 
-    @PostMapping("/update-by-id")
+    @PutMapping("/update-by-id")
     public ResponseEntity<String> updateTourPackage(
             @RequestParam(value = "id") UUID id,
             @RequestParam(value = "ticketDate", required = false) LocalDate ticketDate,

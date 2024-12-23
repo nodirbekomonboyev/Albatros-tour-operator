@@ -1,4 +1,4 @@
-package com.nodirverse.albatros.dto.response;
+package com.nodirverse.albatros.entity.dto.response;
 
 import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
