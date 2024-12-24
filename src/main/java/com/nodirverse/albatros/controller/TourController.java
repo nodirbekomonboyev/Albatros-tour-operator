@@ -57,7 +57,9 @@ public class TourController {
                 ));
     }
 
-
-
+    @DeleteMapping("delete-by-id{tourId}")
+    public ResponseEntity<String> deleteById(@PathVariable UUID tourId){
+        return ResponseEntity.ok(tourPackageService.delete(tourId));
+    }
 
 }
