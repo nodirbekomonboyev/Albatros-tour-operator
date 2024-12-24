@@ -17,7 +17,7 @@ public class MailController {
 
     private final MailMessageService mailMessageService;
 
-    @PostMapping("/send-code")
+    @PostMapping("/send")
     public SendMessageResponse sendMessage(@RequestBody MailMessageRequest request){
         return mailMessageService.sendVerification(request);
     }

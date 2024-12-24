@@ -1,14 +1,10 @@
 package com.nodirverse.albatros.service;
 
 import com.nodirverse.albatros.entity.VerificationCode;
-import com.nodirverse.albatros.exception.DataNotFoundException;
-
 import com.nodirverse.albatros.repository.VerificationCodeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

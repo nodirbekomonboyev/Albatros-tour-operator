@@ -93,4 +93,9 @@ public class TourPackageService {
         responseMap.put("data", tourPackageResponses);
         return responseMap;
     }
+
+    public String delete(UUID tourId) {
+        tourPackageRepository.deleteById(tourId);
+        return "Tour Package deleted";
+    }
 }
