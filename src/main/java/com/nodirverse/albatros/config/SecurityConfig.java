@@ -42,7 +42,9 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "/swagger-ui.html",
             "/api/v1/auth/**",
-            "/api/v1/notifications/send-code"
+            "/api/v1/notifications/send-code",
+            "/api/v1/questions/send",
+            "/api/v1/tour/get-page"
     };
 
     @Bean
@@ -54,6 +56,7 @@ public class SecurityConfig {
                     requestConfigurer
                             .requestMatchers(WHITE_LIST).permitAll()
                             .requestMatchers("/api/v1/tour").hasRole("ADMIN")
+                            .requestMatchers("/api/v1/questions").hasRole("ADMIN")
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(
