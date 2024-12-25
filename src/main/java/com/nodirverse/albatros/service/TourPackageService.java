@@ -5,15 +5,17 @@ import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
-import com.nodirverse.albatros.entity.dto.request.TourPackageRequest;
-import com.nodirverse.albatros.entity.dto.response.TourPackageResponse;
+import com.nodirverse.albatros.dto.request.TourPackageRequest;
+import com.nodirverse.albatros.dto.response.TourPackageResponse;
 import com.nodirverse.albatros.exception.DataNotFoundException;
 import com.nodirverse.albatros.repository.TourPackageRepository;
+import com.nodirverse.albatros.specification.TourPackageSpecification;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -79,6 +81,35 @@ public class TourPackageService {
     public Map<String, Object> getTourPage(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
         Page<TourPackage> tourPage = tourPackageRepository.findTourPackagesByOrderByTicketDate(pageable);
+        return getStringObjectMap(tourPage);
+    }
+
+    public Map<String, Object> getFilteredTourPage(
+            DepartureCity departureCity,
+            Country country,
+            Nutrition nutrition,
+            String hotel,
+            LocalDate startDate,
+            LocalDate endDate,
+            Transport transport,
+            int pageNumber,
+            int pageSize) {
+
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+
+        Specification<TourPackage> spec = Specification.where(TourPackageSpecification.hasDepartureCity(departureCity))
+                .and(TourPackageSpecification.hasCountry(country))
+                .and(TourPackageSpecification.hasNutrition(nutrition))
+                .and(TourPackageSpecification.hasHotel(hotel))
+                .and(TourPackageSpecification.hasTicketDateBetween(startDate, endDate))
+                .and(TourPackageSpecification.hasTransport(transport));
+
+        Page<TourPackage> tourPage = tourPackageRepository.findAll(spec, pageable);
+
+        return getStringObjectMap(tourPage);
+    }
+
+    private Map<String, Object> getStringObjectMap(Page<TourPackage> tourPage) {
         List<TourPackageResponse> tourPackageResponses = new ArrayList<>();
         for (TourPackage tourPackage : tourPage.getContent()) {
             tourPackageResponses.add(modelMapper.map(tourPackage, TourPackageResponse.class));
@@ -93,6 +124,7 @@ public class TourPackageService {
         responseMap.put("data", tourPackageResponses);
         return responseMap;
     }
+
 
     public String delete(UUID tourId) {
         tourPackageRepository.deleteById(tourId);

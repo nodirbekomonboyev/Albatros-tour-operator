@@ -1,20 +1,18 @@
 package com.nodirverse.albatros.service;
 
+import com.nodirverse.albatros.dto.request.*;
 import com.nodirverse.albatros.entity.UserEntity;
 import com.nodirverse.albatros.entity.VerificationCode;
-import com.nodirverse.albatros.entity.dto.request.*;
-import com.nodirverse.albatros.entity.dto.response.JwtResponse;
+import com.nodirverse.albatros.dto.response.JwtResponse;
 import com.nodirverse.albatros.entity.enums.UserRole;
 import com.nodirverse.albatros.entity.enums.UserStatus;
 import com.nodirverse.albatros.exception.DataAlreadyExistsException;
 import com.nodirverse.albatros.exception.DataNotFoundException;
 import com.nodirverse.albatros.exception.WrongPasswordException;
 import com.nodirverse.albatros.repository.UserRepository;
-import com.nodirverse.albatros.repository.VerificationCodeRepository;
 import com.nodirverse.albatros.service.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

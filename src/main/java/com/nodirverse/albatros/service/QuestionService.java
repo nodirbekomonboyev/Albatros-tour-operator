@@ -1,8 +1,8 @@
 package com.nodirverse.albatros.service;
 
 import com.nodirverse.albatros.entity.Question;
-import com.nodirverse.albatros.entity.dto.request.QuestionRequest;
-import com.nodirverse.albatros.entity.dto.response.QuestionResponse;
+import com.nodirverse.albatros.dto.request.QuestionRequest;
+import com.nodirverse.albatros.dto.response.QuestionResponse;
 import com.nodirverse.albatros.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
