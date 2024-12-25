@@ -1,8 +1,7 @@
 package com.nodirverse.albatros.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nodirverse.albatros.entity.dto.AppErrorDto;
-import com.nodirverse.albatros.entity.enums.UserRole;
+import com.nodirverse.albatros.dto.AppErrorDto;
 import com.nodirverse.albatros.service.jwt.AuthenticationService;
 import com.nodirverse.albatros.service.jwt.JwtFilter;
 import com.nodirverse.albatros.service.jwt.JwtUtil;

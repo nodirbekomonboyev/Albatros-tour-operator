@@ -4,10 +4,11 @@ import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
-import com.nodirverse.albatros.entity.dto.request.TourPackageRequest;
-import com.nodirverse.albatros.entity.dto.response.TourPackageResponse;
+import com.nodirverse.albatros.dto.request.TourPackageRequest;
+import com.nodirverse.albatros.dto.response.TourPackageResponse;
 import com.nodirverse.albatros.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +33,26 @@ public class TourController {
     }
 
     @GetMapping("/get-page")
-    public ResponseEntity<Map<String, Object>> getTourPage(
+    public ResponseEntity<Map<String, Object>> getTourPackages(
+            @RequestParam(required = false) DepartureCity departureCity,
+            @RequestParam(required = false) Country country,
+            @RequestParam(required = false) Nutrition nutrition,
+            @RequestParam(required = false) String hotel,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam(required = false) Transport transport,
             @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "20") int pageSize) {
-        return ResponseEntity.ok(tourPackageService.getTourPage(pageNumber, pageSize));
+            @RequestParam(defaultValue = "20") int pageSize)
+    {
+        Map<String, Object> response;
+
+        if (departureCity != null || country != null || nutrition != null || hotel != null || startDate != null || endDate != null || transport != null) {
+            response = tourPackageService.getFilteredTourPage(departureCity, country, nutrition, hotel, startDate, endDate, transport, pageNumber, pageSize);
+        } else {
+            response = tourPackageService.getTourPage(pageNumber, pageSize);
+        }
+
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/update-by-id")

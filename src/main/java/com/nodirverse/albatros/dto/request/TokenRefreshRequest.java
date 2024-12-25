@@ -1,4 +1,4 @@
-package com.nodirverse.albatros.entity.dto.request;
+package com.nodirverse.albatros.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,8 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
-public class VerificationRequest {
-    private String email;
-    private String code;
+@Setter
+public class TokenRefreshRequest {
+    private String refreshToken;
 }

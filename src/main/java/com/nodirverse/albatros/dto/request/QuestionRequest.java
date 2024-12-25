@@ -1,4 +1,4 @@
-package com.nodirverse.albatros.entity.dto.request;
+package com.nodirverse.albatros.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TokenRefreshRequest {
-    private String refreshToken;
+public class QuestionRequest {
+    private String name;
+    private String phoneNumber;
+    private String question;
 }

@@ -1,7 +1,7 @@
 package com.nodirverse.albatros.controller;
 
-import com.nodirverse.albatros.entity.dto.request.QuestionRequest;
-import com.nodirverse.albatros.entity.dto.response.QuestionResponse;
+import com.nodirverse.albatros.dto.request.QuestionRequest;
+import com.nodirverse.albatros.dto.response.QuestionResponse;
 import com.nodirverse.albatros.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

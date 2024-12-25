@@ -1,4 +1,4 @@
-package com.nodirverse.albatros.entity.dto.response;
+package com.nodirverse.albatros.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

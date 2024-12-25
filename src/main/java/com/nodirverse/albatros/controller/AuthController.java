@@ -1,11 +1,11 @@
 package com.nodirverse.albatros.controller;
 
 
-import com.nodirverse.albatros.entity.dto.request.AuthRequest;
-import com.nodirverse.albatros.entity.dto.request.SignUpRequest;
-import com.nodirverse.albatros.entity.dto.request.TokenRefreshRequest;
-import com.nodirverse.albatros.entity.dto.request.VerificationRequest;
-import com.nodirverse.albatros.entity.dto.response.JwtResponse;
+import com.nodirverse.albatros.dto.request.AuthRequest;
+import com.nodirverse.albatros.dto.request.SignUpRequest;
+import com.nodirverse.albatros.dto.request.TokenRefreshRequest;
+import com.nodirverse.albatros.dto.request.VerificationRequest;
+import com.nodirverse.albatros.dto.response.JwtResponse;
 import com.nodirverse.albatros.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

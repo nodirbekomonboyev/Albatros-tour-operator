@@ -1,4 +1,4 @@
-package com.nodirverse.albatros.entity.dto;
+package com.nodirverse.albatros.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

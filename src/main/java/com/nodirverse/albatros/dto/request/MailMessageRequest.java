@@ -1,4 +1,5 @@
-package com.nodirverse.albatros.entity.dto.request;
+package com.nodirverse.albatros.dto.request;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class QuestionRequest {
-    private String name;
-    private String phoneNumber;
-    private String question;
+public class MailMessageRequest {
+    private String receiver;
+    private String subject;
+    private String message;
+
 }

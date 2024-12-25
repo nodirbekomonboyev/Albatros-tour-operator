@@ -1,8 +1,8 @@
 package com.nodirverse.albatros.controller;
 
 
-import com.nodirverse.albatros.entity.dto.request.MailMessageRequest;
-import com.nodirverse.albatros.entity.dto.response.SendMessageResponse;
+import com.nodirverse.albatros.dto.request.MailMessageRequest;
+import com.nodirverse.albatros.dto.response.SendMessageResponse;
 import com.nodirverse.albatros.service.MailMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

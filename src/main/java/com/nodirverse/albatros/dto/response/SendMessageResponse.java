@@ -1,6 +1,6 @@
-package com.nodirverse.albatros.entity.dto.response;
+package com.nodirverse.albatros.dto.response;
 
-import com.nodirverse.albatros.entity.dto.request.MailMessageRequest;
+import com.nodirverse.albatros.dto.request.MailMessageRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
