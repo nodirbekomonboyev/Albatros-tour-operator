@@ -24,7 +24,7 @@ public class SwaggerConfig {
                 .components(new Components().addSecuritySchemes("bearerAuth", securityScheme))
                 .addSecurityItem(securityRequirement)
                 .info(new Info()
-                        .title("Rivoj Education")
+                        .title("Albatros")
                         .version("1.0.0")
                         .description("Rest APIs"));
     }

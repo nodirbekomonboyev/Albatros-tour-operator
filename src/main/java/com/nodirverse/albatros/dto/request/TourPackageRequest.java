@@ -1,6 +1,5 @@
 package com.nodirverse.albatros.dto.request;
 
-import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
@@ -19,7 +18,7 @@ import java.time.LocalDate;
 public class TourPackageRequest {
     private LocalDate ticketDate;
     private DepartureCity departureCity;
-    private Country country;
+    private String country;
     private Integer nights;
     private String hotel;
     private Integer place;

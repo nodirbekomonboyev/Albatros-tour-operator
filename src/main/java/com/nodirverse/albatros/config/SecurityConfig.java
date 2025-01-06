@@ -56,6 +56,7 @@ public class SecurityConfig {
                             .requestMatchers("/api/v1/tour").hasRole("ADMIN")
                             .requestMatchers("/api/v1/questions").hasRole("ADMIN")
                             .requestMatchers("/api/v1/notifications/send").hasRole("ADMIN")
+                            .requestMatchers("/api/v1/employees").hasRole("ADMIN")
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(
