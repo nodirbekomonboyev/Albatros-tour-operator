@@ -1,6 +1,7 @@
 package com.nodirverse.albatros.entity;
 
 import com.nodirverse.albatros.entity.enums.Category;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

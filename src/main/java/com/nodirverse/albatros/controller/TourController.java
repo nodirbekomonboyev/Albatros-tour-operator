@@ -1,11 +1,18 @@
 package com.nodirverse.albatros.controller;
 
+import com.nodirverse.albatros.dto.request.EmployeeCreateRequest;
+import com.nodirverse.albatros.dto.request.HotelCreateRequest;
+import com.nodirverse.albatros.dto.response.EmployeeResponse;
+import com.nodirverse.albatros.dto.response.HotelResponse;
+import com.nodirverse.albatros.entity.Country;
 import com.nodirverse.albatros.entity.Hotel;
+import com.nodirverse.albatros.entity.enums.Category;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
 import com.nodirverse.albatros.dto.request.TourPackageRequest;
 import com.nodirverse.albatros.dto.response.TourPackageResponse;
+import com.nodirverse.albatros.service.HotelService;
 import com.nodirverse.albatros.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -78,5 +85,4 @@ public class TourController {
     public ResponseEntity<String> deleteById(@PathVariable UUID tourId){
         return ResponseEntity.ok(tourPackageService.delete(tourId));
     }
-
 }

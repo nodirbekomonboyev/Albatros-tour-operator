@@ -1,6 +1,5 @@
 package com.nodirverse.albatros.service;
 
-import com.nodirverse.albatros.entity.Hotel;
 import com.nodirverse.albatros.entity.TourPackage;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;

@@ -20,7 +20,7 @@ public class NewsService {
     private final ModelMapper modelMapper;
 
     public String create(NewsCreateRequest request) {
-
+        newsRepository.save(modelMapper.map(request, News.class));
         return "News creation successful";
     }
 
