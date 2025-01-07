@@ -13,7 +13,7 @@ public class TourPackageSpecification {
                 departureCity == null ? null : criteriaBuilder.equal(root.get("departureCity"), departureCity);
     }
 
-    public static Specification<TourPackage> hasCountry(Country country) {
+    public static Specification<TourPackage> hasCountry(String country) {
         return (root, query, criteriaBuilder) ->
                 country == null ? null : criteriaBuilder.equal(root.get("country"), country);
     }

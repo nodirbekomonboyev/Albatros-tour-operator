@@ -1,11 +1,18 @@
 package com.nodirverse.albatros.controller;
 
-import com.nodirverse.albatros.entity.enums.Country;
+import com.nodirverse.albatros.dto.request.EmployeeCreateRequest;
+import com.nodirverse.albatros.dto.request.HotelCreateRequest;
+import com.nodirverse.albatros.dto.response.EmployeeResponse;
+import com.nodirverse.albatros.dto.response.HotelResponse;
+import com.nodirverse.albatros.entity.Country;
+import com.nodirverse.albatros.entity.Hotel;
+import com.nodirverse.albatros.entity.enums.Category;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
 import com.nodirverse.albatros.dto.request.TourPackageRequest;
 import com.nodirverse.albatros.dto.response.TourPackageResponse;
+import com.nodirverse.albatros.service.HotelService;
 import com.nodirverse.albatros.service.TourPackageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,7 +30,7 @@ public class TourController {
     private final TourPackageService tourPackageService;
 
     @PostMapping("/create-tour-package")
-    public ResponseEntity<TourPackageResponse> createDiscount(@RequestBody TourPackageRequest request){
+    public ResponseEntity<String> createTourPackage(@RequestBody TourPackageRequest request){
         return ResponseEntity.ok(tourPackageService.create(request));
     }
 
@@ -35,7 +42,7 @@ public class TourController {
     @GetMapping("/get-page")
     public ResponseEntity<Map<String, Object>> getTourPackages(
             @RequestParam(required = false) DepartureCity departureCity,
-            @RequestParam(required = false) Country country,
+            @RequestParam(required = false) String country,
             @RequestParam(required = false) Nutrition nutrition,
             @RequestParam(required = false) String hotel,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -60,7 +67,7 @@ public class TourController {
             @RequestParam(value = "id") UUID id,
             @RequestParam(value = "ticketDate", required = false) LocalDate ticketDate,
             @RequestParam(value = "departureCity",required = false) DepartureCity departureCity,
-            @RequestParam(value = "country",required = false) Country country,
+            @RequestParam(value = "country",required = false) String country,
             @RequestParam(value = "nights",required = false) Integer nights,
             @RequestParam(value = "hotel",required = false) String hotel,
             @RequestParam(value = "place",required = false) Integer place,
@@ -78,5 +85,4 @@ public class TourController {
     public ResponseEntity<String> deleteById(@PathVariable UUID tourId){
         return ResponseEntity.ok(tourPackageService.delete(tourId));
     }
-
 }

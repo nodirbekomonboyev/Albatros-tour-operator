@@ -1,13 +1,9 @@
 package com.nodirverse.albatros.entity;
 
-import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -28,8 +24,7 @@ public class TourPackage extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private DepartureCity departureCity;
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Country country;
+    private String country;
     private Integer nights;
     private String hotel;
     private Integer place;

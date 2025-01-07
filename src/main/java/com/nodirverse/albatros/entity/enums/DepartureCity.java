@@ -4,6 +4,11 @@ public enum DepartureCity {
     TASHKENT,
     NUKUS,
     SAMARKAND,
-    URGENCH
-
+    URGENCH,
+    NAVOI,
+    TERMEZ,
+    BUKHARA,
+    FERGANA,
+    KARSHI,
+    NAMANGAN
 }

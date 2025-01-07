@@ -1,7 +1,6 @@
 package com.nodirverse.albatros.service;
 
 import com.nodirverse.albatros.entity.TourPackage;
-import com.nodirverse.albatros.entity.enums.Country;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
@@ -27,10 +26,10 @@ public class TourPackageService {
 
     private final ModelMapper modelMapper;
     private final TourPackageRepository tourPackageRepository;
-    public TourPackageResponse create(TourPackageRequest request) {
+    public String create(TourPackageRequest request) {
         TourPackage tourPackage = modelMapper.map(request, TourPackage.class);
         tourPackageRepository.save(tourPackage);
-        return modelMapper.map(tourPackage, TourPackageResponse.class);
+        return "Tour package created!";
     }
 
     public List<TourPackageResponse> getAll() {
@@ -41,7 +40,7 @@ public class TourPackageService {
     }
 
 
-    public String update(UUID id, LocalDate ticketDate, DepartureCity departureCity, Country country, Integer nights,
+    public String update(UUID id, LocalDate ticketDate, DepartureCity departureCity, String country, Integer nights,
                          String hotel, Integer place, Nutrition nutrition, Integer price, Transport transport
     ) {
         TourPackage tourPackage = tourPackageRepository.findById(id).orElseThrow(
@@ -86,7 +85,7 @@ public class TourPackageService {
 
     public Map<String, Object> getFilteredTourPage(
             DepartureCity departureCity,
-            Country country,
+            String country,
             Nutrition nutrition,
             String hotel,
             LocalDate startDate,

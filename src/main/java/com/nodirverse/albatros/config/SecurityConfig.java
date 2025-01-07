@@ -42,7 +42,7 @@ public class SecurityConfig {
             "/swagger-ui.html",
             "/api/v1/auth/**",
             "/api/v1/questions/send",
-            "/api/v1/tour/get-page"
+            "/api/v1/tour/get-page",
     };
 
     @Bean
@@ -56,6 +56,9 @@ public class SecurityConfig {
                             .requestMatchers("/api/v1/tour").hasRole("ADMIN")
                             .requestMatchers("/api/v1/questions").hasRole("ADMIN")
                             .requestMatchers("/api/v1/notifications/send").hasRole("ADMIN")
+                            .requestMatchers("/api/v1/employees").hasRole("ADMIN")
+                            .requestMatchers("/api/v1/hotel").hasRole("ADMIN")
+                            .requestMatchers("/api/v1/country").hasRole("ADMIN")
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(
