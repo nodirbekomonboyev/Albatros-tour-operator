@@ -11,9 +11,11 @@ import com.nodirverse.albatros.exception.DataNotFoundException;
 import com.nodirverse.albatros.exception.WrongPasswordException;
 import com.nodirverse.albatros.repository.UserRepository;
 import com.nodirverse.albatros.service.jwt.JwtUtil;
+import com.nodirverse.albatros.service.jwt.LoginAttemptService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,17 +28,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final VerificationCodeService verificationCodeService;
+    private final LoginAttemptService loginAttemptService;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final MailMessageService mailMessageService;
-    public JwtResponse signIn(AuthRequest request) {
+
+
+    public JwtResponse signIn(AuthRequest request, String ip) {
         UserEntity user = userRepository.findUserEntityByEmail(request.getEmail())
                 .orElseThrow(() -> new DataNotFoundException("user not found"));
         if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             List<String> tokens = jwtUtil.generateToken(user);
             return new JwtResponse(tokens.get(0),tokens.get(1));
         }
-        throw new AuthenticationCredentialsNotFoundException("password didn't match");
+        loginAttemptService.loginFailed(ip);
+        throw new WrongPasswordException("password didn't match");
     }
 
     public JwtResponse tokenRefresh(TokenRefreshRequest request) {
@@ -47,7 +53,7 @@ public class UserService {
             List<String> tokens = jwtUtil.generateToken(user);
             return new JwtResponse(tokens.get(0), tokens.get(1));
         }
-        throw new AuthenticationCredentialsNotFoundException("refresh token didn't match");
+        throw new BadCredentialsException("refresh token didn't match");
     }
 
     public String signUp(SignUpRequest request) {

@@ -11,6 +11,10 @@ public class AppErrorDto {
     private final String errorPath;
     private final Integer errorCode;
 
+    public AppErrorDto(String friendlyMessage, Integer errorCode) {
+        this(friendlyMessage, friendlyMessage, errorCode);
+    }
+
     public AppErrorDto(String friendlyMessage, String errorPath, Integer errorCode) {
         this(friendlyMessage, friendlyMessage, errorPath, errorCode);
     }
