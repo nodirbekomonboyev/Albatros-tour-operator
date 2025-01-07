@@ -5,6 +5,7 @@ import com.nodirverse.albatros.dto.response.HotelResponse;
 import com.nodirverse.albatros.entity.Country;
 import com.nodirverse.albatros.entity.enums.Category;
 import com.nodirverse.albatros.service.HotelService;
+import com.nodirverse.albatros.service.RecommendedHotelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class HotelController{
     private final HotelService hotelService;
+    private final RecommendedHotelService recommendedHotelService;
 
     @PostMapping("create")
     public ResponseEntity<String> createHotel(@RequestBody HotelCreateRequest request){
@@ -28,10 +30,6 @@ public class HotelController{
         return ResponseEntity.ok(hotelService.getAll());
     }
 
-    @GetMapping("get-premiums")
-    public ResponseEntity<List<HotelResponse>> getAllPremiums(){
-        return ResponseEntity.ok(hotelService.getAllByCategory(Category.FIFTH));
-    }
 
     @PutMapping("update")
     public ResponseEntity<String> updateHotel(
@@ -48,4 +46,6 @@ public class HotelController{
     public ResponseEntity<String> deleteHotel(@RequestParam(value = "id") UUID id){
         return ResponseEntity.ok(hotelService.delete(id));
     }
+
+
 }

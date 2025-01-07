@@ -23,7 +23,6 @@ public class LoginAttemptService {
         int attempts = 0;
         if (redisTemplate.hasKey(cacheKey)) {
             attempts = (int) redisTemplate.opsForValue().get(cacheKey);
-            System.out.println("\n\nattempts = " + attempts);
         }
         attempts++;
         if(attempts >= MAX_ATTEMPTS) {

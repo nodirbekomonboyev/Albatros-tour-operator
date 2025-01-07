@@ -50,13 +50,11 @@ public class AuthController {
     public ResponseEntity<ApiResponse<JwtResponse>> signIn(@Valid @RequestBody AuthRequest request) {
         String clientIp = getClientIP(this.request);
 
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + clientIp + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-
         if (loginAttemptService.isBlocked(clientIp)) {
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
                     .body(ApiResponse.<JwtResponse>builder()
                             .success(false)
-                            .message("Juda ko'p muvaffaqiyatsiz urinishlar sabab vaqtinchalik bloklandingiz.")
+                            .message("Too many attempts. You are temporarily blocked!")
                             .data(null)
                             .build());
         }

@@ -59,6 +59,7 @@ public class SecurityConfig {
                             .requestMatchers("/api/v1/employees").hasRole("ADMIN")
                             .requestMatchers("/api/v1/hotel").hasRole("ADMIN")
                             .requestMatchers("/api/v1/country").hasRole("ADMIN")
+                            .requestMatchers("/api/v1/home").hasRole("ADMIN")
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(
