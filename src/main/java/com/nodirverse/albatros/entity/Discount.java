@@ -18,4 +18,5 @@ public class Discount extends BaseEntity {
     private TourPackage tourPackage;
     private Integer newPrice;
     private String description;
+    private String imgUrl;
 }
