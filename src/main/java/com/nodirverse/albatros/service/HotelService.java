@@ -80,4 +80,17 @@ public class HotelService {
         hotelRepository.deleteById(id);
         return "Hotel deleted";
     }
+
+    public void updateImageUrl(UUID id, String imageUrl) {
+        Hotel hotel = hotelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hotel not found with id: " + id));
+
+        hotel.setImage(imageUrl);
+        hotelRepository.save(hotel);
+    }
+
+    public Hotel getHotelById(UUID id) {
+        return hotelRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Hotel not found with id: " + id));
+    }
 }

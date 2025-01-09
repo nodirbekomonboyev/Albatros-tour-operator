@@ -40,3 +40,6 @@ springdoc:
     tags-sorter: alpha
     operations-sorter: alpha
     doc-expansion: none
+
+file:
+  upload-dir: C:\Users\Hp\Desktop\CurrentProjects\Albatros\src\main\resources\images
