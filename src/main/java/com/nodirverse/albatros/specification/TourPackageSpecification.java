@@ -13,19 +13,29 @@ public class TourPackageSpecification {
                 departureCity == null ? null : criteriaBuilder.equal(root.get("departureCity"), departureCity);
     }
 
-    public static Specification<TourPackage> hasCountry(String country) {
-        return (root, query, criteriaBuilder) ->
-                country == null ? null : criteriaBuilder.equal(root.get("country"), country);
+    public static Specification<TourPackage> hasCountry(String countryName) {
+        return (root, query, criteriaBuilder) -> {
+            if (countryName == null) return null;
+            return criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("country").get("name")),
+                    "%" + countryName.toLowerCase() + "%"
+            );
+        };
+    }
+
+    public static Specification<TourPackage> hasHotel(String hotelName) {
+        return (root, query, criteriaBuilder) -> {
+            if (hotelName == null) return null;
+            return criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("hotel").get("name")),
+                    "%" + hotelName.toLowerCase() + "%"
+            );
+        };
     }
 
     public static Specification<TourPackage> hasNutrition(Nutrition nutrition) {
         return (root, query, criteriaBuilder) ->
                 nutrition == null ? null : criteriaBuilder.equal(root.get("nutrition"), nutrition);
-    }
-
-    public static Specification<TourPackage> hasHotel(String hotel) {
-        return (root, query, criteriaBuilder) ->
-                hotel == null ? null : criteriaBuilder.like(root.get("hotel"), "%" + hotel + "%");
     }
 
     public static Specification<TourPackage> hasTicketDateBetween(LocalDate startDate, LocalDate endDate) {

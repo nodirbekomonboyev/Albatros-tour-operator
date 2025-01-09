@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class News extends BaseEntity {
     private String title;
     private String text;
-    private String image;
     private String link;
-    private String content;
+    private String imageUrl;
 }

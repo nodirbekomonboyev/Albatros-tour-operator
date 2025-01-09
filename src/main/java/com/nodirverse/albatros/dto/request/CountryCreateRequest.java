@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 public class CountryCreateRequest {
     private String name;
     private String city;
-    private String picture;
     private Boolean isSeasonal;
 }

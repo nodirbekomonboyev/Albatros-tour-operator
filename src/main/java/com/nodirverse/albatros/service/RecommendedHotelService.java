@@ -10,7 +10,6 @@ import com.nodirverse.albatros.repository.RecommendedHotelRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.UUID;
 import java.util.List;

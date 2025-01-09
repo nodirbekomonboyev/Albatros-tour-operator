@@ -4,6 +4,7 @@ import com.nodirverse.albatros.dto.request.DiscountCreateRequest;
 import com.nodirverse.albatros.dto.response.DiscountResponse;
 import com.nodirverse.albatros.dto.response.TourPackageResponse;
 import com.nodirverse.albatros.entity.Discount;
+import com.nodirverse.albatros.entity.Hotel;
 import com.nodirverse.albatros.entity.TourPackage;
 import com.nodirverse.albatros.exception.DataNotFoundException;
 import com.nodirverse.albatros.repository.DiscountRepository;
@@ -59,5 +60,14 @@ public class DiscountService {
     public String delete(UUID id){
         discountRepository.deleteById(id);
         return "Discount deleted!";
+    }
+
+
+    public void updateImageUrl(UUID id, String imageUrl) {
+        Discount discount = discountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Discount not found with id: " + id));
+
+        discount.setImageUrl(imageUrl);
+        discountRepository.save(discount);
     }
 }

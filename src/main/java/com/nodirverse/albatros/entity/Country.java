@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class Country extends BaseEntity {
     private String name;
     private String city;
-    private String picture;
+    private String imageUrl;
     private Boolean isSeasonal;
 }

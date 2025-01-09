@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Employee extends  BaseEntity {
     private String name;
     private String surname;
-    private String picture;
+    private String imageUrl;
     private String phoneNumber;
     private String position;
 }

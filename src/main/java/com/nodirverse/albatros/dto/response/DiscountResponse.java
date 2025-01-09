@@ -16,4 +16,5 @@ public class DiscountResponse {
     private TourPackageResponse tourPackageResponse;
     private Integer newPrice;
     private String description;
+    private String imageUrl;
 }

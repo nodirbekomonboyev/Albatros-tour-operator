@@ -21,8 +21,4 @@ public class VerificationCodeService {
     public void delete(VerificationCode verificationCode){
         verificationCodeRepository.delete(verificationCode);
     }
-
-    public void deleteByEmail(String email){
-        verificationCodeRepository.deleteByEmail(email);
-    }
 }
