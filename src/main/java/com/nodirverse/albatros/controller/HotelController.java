@@ -45,11 +45,11 @@ public class HotelController{
     public ResponseEntity<String> updateHotel(
             @RequestParam(value = "id") UUID id,
             @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "country", required = false) Country country,
+            @RequestParam(value = "countryId", required = false) UUID countryId,
             @RequestParam(value = "category", required = false) Category category,
             @RequestParam(value = "images", required = false) String image
     ){
-        return ResponseEntity.ok(hotelService.update(id, name, country, category, image));
+        return ResponseEntity.ok(hotelService.update(id, name, countryId, category, image));
     }
 
     @DeleteMapping("delete")

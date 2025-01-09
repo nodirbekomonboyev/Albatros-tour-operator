@@ -71,13 +71,6 @@ public class TourPackageService {
                 () -> new DataNotFoundException("tour not found!")
         );
 
-        Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(
-                () -> new DataNotFoundException("hotel not found!")
-        );
-
-        Country country = countryRepository.findById(countryId).orElseThrow(
-                () -> new DataNotFoundException("country not found!")
-        );
 
         if(ticketDate != null){
             tourPackage.setTicketDate(ticketDate);
@@ -85,13 +78,19 @@ public class TourPackageService {
         if(departureCity != null){
             tourPackage.setDepartureCity(departureCity);
         }
-        if(country != null){
+        if(countryId != null){
+            Country country = countryRepository.findById(countryId).orElseThrow(
+                    () -> new DataNotFoundException("country not found!")
+            );
             tourPackage.setCountry(country);
         }
         if(nights != null){
             tourPackage.setNights(nights);
         }
-        if(hotel != null){
+        if(hotelId != null){
+            Hotel hotel = hotelRepository.findById(hotelId).orElseThrow(
+                    () -> new DataNotFoundException("hotel not found!")
+            );
             tourPackage.setHotel(hotel);
         }
         if(place != null){

@@ -44,12 +44,17 @@ public class DiscountService {
         List<DiscountResponse> responses = new ArrayList<>();
         list.forEach(
                 discount -> {
-                    TourPackageResponse tourPackageResponse = modelMapper.map(discount.getTourPackage(), TourPackageResponse.class );
+                    TourPackage tourPackage = discount.getTourPackage();
+                    TourPackageResponse tourPackageResponse = modelMapper.map(tourPackage, TourPackageResponse.class);
+                    tourPackageResponse.setId(tourPackage.getId());
+                    tourPackageResponse.setHotelName(tourPackage.getHotel().getName());
+                    tourPackageResponse.setCountry(tourPackage.getCountry().getName());
                     DiscountResponse discountResponse = DiscountResponse.builder()
                             .id(discount.getId())
                             .tourPackageResponse(tourPackageResponse)
                             .newPrice(discount.getNewPrice())
                             .description(discount.getDescription())
+                            .imageUrl(discount.getImageUrl())
                             .build();
                     responses.add(discountResponse);
                 }

@@ -40,10 +40,6 @@ public class CountryController {
         return ResponseEntity.ok(countryService.getAll());
     }
 
-    @GetMapping("seasonal-countries")
-    public ResponseEntity<List<CountryResponse>> SeasonalCountries(){
-        return ResponseEntity.ok(countryService.getAllSeasonal());
-    }
 
     @PutMapping("update")
     public ResponseEntity<String> updateCountry(

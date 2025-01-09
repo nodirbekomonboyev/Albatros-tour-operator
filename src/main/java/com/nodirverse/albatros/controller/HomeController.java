@@ -4,10 +4,7 @@ package com.nodirverse.albatros.controller;
 import com.nodirverse.albatros.config.FileStorageProperties;
 import com.nodirverse.albatros.dto.request.DiscountCreateRequest;
 import com.nodirverse.albatros.dto.request.NewsCreateRequest;
-import com.nodirverse.albatros.dto.response.DiscountResponse;
-import com.nodirverse.albatros.dto.response.HotelResponse;
-import com.nodirverse.albatros.dto.response.LocationResponse;
-import com.nodirverse.albatros.dto.response.NewsResponse;
+import com.nodirverse.albatros.dto.response.*;
 import com.nodirverse.albatros.entity.enums.Category;
 import com.nodirverse.albatros.service.*;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +29,7 @@ public class HomeController {
 
     private final HotelService hotelService;
     private final LocationService locationService;
+    private final CountryService countryService;
     private final RecommendedHotelService recommendedHotelService;
     private final NewsService newsService;
     private final DiscountService discountService;
@@ -70,6 +68,11 @@ public class HomeController {
     @GetMapping("get-news")
     public ResponseEntity<List<NewsResponse>> getAllNews(){
         return ResponseEntity.ok(newsService.getAll());
+    }
+
+    @GetMapping("seasonal-countries")
+    public ResponseEntity<List<CountryResponse>> SeasonalCountries(){
+        return ResponseEntity.ok(countryService.getAllSeasonal());
     }
 
     @GetMapping("get-premiums")
