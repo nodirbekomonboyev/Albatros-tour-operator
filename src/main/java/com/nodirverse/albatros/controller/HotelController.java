@@ -45,11 +45,11 @@ public class HotelController{
     public ResponseEntity<String> updateHotel(
             @RequestParam(value = "id") UUID id,
             @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "country", required = false) Country country,
+            @RequestParam(value = "countryId", required = false) UUID countryId,
             @RequestParam(value = "category", required = false) Category category,
             @RequestParam(value = "images", required = false) String image
     ){
-        return ResponseEntity.ok(hotelService.update(id, name, country, category, image));
+        return ResponseEntity.ok(hotelService.update(id, name, countryId, category, image));
     }
 
     @DeleteMapping("delete")
@@ -69,28 +69,4 @@ public class HotelController{
 
         return ResponseEntity.ok(imageUrl);
     }
-
-    @GetMapping("/{id}/image")
-    public ResponseEntity<Resource> getImage(@PathVariable UUID id) {
-        Hotel hotel = hotelService.getHotelById(id);
-        String imageUrl = hotel.getImage();
-
-        String uploadDir = new FileStorageProperties().getUploadDir();
-
-        Path imagePath = Paths.get(uploadDir)
-                .toAbsolutePath().normalize().resolve(imageUrl.replace("/images/", ""));
-        if (!Files.exists(imagePath)) {
-            throw new RuntimeException("Fayl topilmadi: " + imageUrl);
-        }
-
-        try {
-            Resource resource = new UrlResource(imagePath.toUri());
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
-                    .body(resource);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("Tasvirni yuklashda xatolik yuz berdi: " + imageUrl, e);
-        }
-    }
-
 }

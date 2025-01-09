@@ -21,6 +21,6 @@ public class Hotel extends BaseEntity {
     @JoinColumn(name = "country_id")
     private Country country;
     private Category category;
-    private String image;
+    private String imageUrl;
 }
 

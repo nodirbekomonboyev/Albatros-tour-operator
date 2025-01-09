@@ -23,10 +23,13 @@ public class TourPackage extends BaseEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private DepartureCity departureCity;
-    @Column(nullable = false)
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
     private Integer nights;
-    private String hotel;
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
     private Integer place;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

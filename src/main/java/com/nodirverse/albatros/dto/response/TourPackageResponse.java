@@ -1,5 +1,6 @@
 package com.nodirverse.albatros.dto.response;
 
+import com.nodirverse.albatros.entity.Hotel;
 import com.nodirverse.albatros.entity.enums.DepartureCity;
 import com.nodirverse.albatros.entity.enums.Nutrition;
 import com.nodirverse.albatros.entity.enums.Transport;
@@ -22,7 +23,7 @@ public class TourPackageResponse {
     private DepartureCity departureCity;
     private String country;
     private Integer nights;
-    private String hotel;
+    private String hotelName;
     private Integer place;
     private Nutrition nutrition;
     private Integer price;

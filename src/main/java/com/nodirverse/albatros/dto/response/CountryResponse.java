@@ -13,6 +13,6 @@ public class CountryResponse {
     private UUID id;
     private String name;
     private String city;
-    private String picture;
+    private String imageUrl;
     private Boolean isSeasonal;
 }

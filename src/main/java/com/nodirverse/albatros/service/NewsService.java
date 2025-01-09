@@ -2,13 +2,13 @@ package com.nodirverse.albatros.service;
 
 import com.nodirverse.albatros.dto.request.NewsCreateRequest;
 import com.nodirverse.albatros.dto.response.NewsResponse;
+import com.nodirverse.albatros.entity.Hotel;
 import com.nodirverse.albatros.entity.News;
 import com.nodirverse.albatros.exception.DataNotFoundException;
 import com.nodirverse.albatros.repository.NewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,7 +35,7 @@ public class NewsService {
     }
 
 
-    public String update(UUID id, String title, String text, String link, String content) {
+    public String update(UUID id, String title, String text, String link) {
         News news = newsRepository.findById(id).orElseThrow(
                 () -> new DataNotFoundException("news not found!")
         );
@@ -49,9 +49,6 @@ public class NewsService {
         if(link != null){
             news.setLink(link);
         }
-        if(content != null){
-            news.setContent(content);
-        }
         newsRepository.save(news);
         return "News updated";
     }
@@ -59,5 +56,13 @@ public class NewsService {
     public String delete(UUID id) {
         newsRepository.deleteById(id);
         return "News deleted";
+    }
+
+    public void updateImageUrl(UUID id, String imageUrl) {
+        News news = newsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("News not found with id: " + id));
+
+        news.setImageUrl(imageUrl);
+        newsRepository.save(news);
     }
 }

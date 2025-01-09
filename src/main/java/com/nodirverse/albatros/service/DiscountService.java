@@ -4,6 +4,7 @@ import com.nodirverse.albatros.dto.request.DiscountCreateRequest;
 import com.nodirverse.albatros.dto.response.DiscountResponse;
 import com.nodirverse.albatros.dto.response.TourPackageResponse;
 import com.nodirverse.albatros.entity.Discount;
+import com.nodirverse.albatros.entity.Hotel;
 import com.nodirverse.albatros.entity.TourPackage;
 import com.nodirverse.albatros.exception.DataNotFoundException;
 import com.nodirverse.albatros.repository.DiscountRepository;
@@ -43,12 +44,17 @@ public class DiscountService {
         List<DiscountResponse> responses = new ArrayList<>();
         list.forEach(
                 discount -> {
-                    TourPackageResponse tourPackageResponse = modelMapper.map(discount.getTourPackage(), TourPackageResponse.class );
+                    TourPackage tourPackage = discount.getTourPackage();
+                    TourPackageResponse tourPackageResponse = modelMapper.map(tourPackage, TourPackageResponse.class);
+                    tourPackageResponse.setId(tourPackage.getId());
+                    tourPackageResponse.setHotelName(tourPackage.getHotel().getName());
+                    tourPackageResponse.setCountry(tourPackage.getCountry().getName());
                     DiscountResponse discountResponse = DiscountResponse.builder()
                             .id(discount.getId())
                             .tourPackageResponse(tourPackageResponse)
                             .newPrice(discount.getNewPrice())
                             .description(discount.getDescription())
+                            .imageUrl(discount.getImageUrl())
                             .build();
                     responses.add(discountResponse);
                 }
@@ -59,5 +65,14 @@ public class DiscountService {
     public String delete(UUID id){
         discountRepository.deleteById(id);
         return "Discount deleted!";
+    }
+
+
+    public void updateImageUrl(UUID id, String imageUrl) {
+        Discount discount = discountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Discount not found with id: " + id));
+
+        discount.setImageUrl(imageUrl);
+        discountRepository.save(discount);
     }
 }

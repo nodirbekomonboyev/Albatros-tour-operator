@@ -29,13 +29,6 @@ public class EmployeeService {
         if (byPhoneNumber.isPresent()) {
             throw new DataAlreadyExistsException("Employee already exists");
         }
-
-        /**
-         *
-         *  after write upload-service
-         *
-         * */
-
         employeeRepository.save(modelMapper.map(request, Employee.class));
         return "Employee created";
     }
@@ -75,5 +68,19 @@ public class EmployeeService {
     public String delete(UUID id) {
         employeeRepository.deleteById(id);
         return "Employee deleted";
+    }
+
+    public Employee getEmployeeById(UUID id) {
+        return employeeRepository.findById(id).orElseThrow(
+                () -> new DataNotFoundException("employee not found!")
+        );
+    }
+
+    public void updateImageUrl(UUID id, String imageUrl) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+
+        employee.setImageUrl(imageUrl);
+        employeeRepository.save(employee);
     }
 }

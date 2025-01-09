@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -18,9 +19,9 @@ import java.time.LocalDate;
 public class TourPackageRequest {
     private LocalDate ticketDate;
     private DepartureCity departureCity;
-    private String country;
+    private UUID countryId;
     private Integer nights;
-    private String hotel;
+    private UUID hotelId;
     private Integer place;
     private Nutrition nutrition;
     private Integer price;

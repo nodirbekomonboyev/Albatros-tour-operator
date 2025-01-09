@@ -11,7 +11,6 @@ import com.nodirverse.albatros.repository.HotelRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -54,22 +53,26 @@ public class HotelService {
     }
 
 
-    public String update(UUID id, String name, Country country, Category category, String image) {
+    public String update(UUID id, String name, UUID countryId, Category category, String image) {
         Hotel hotel = hotelRepository.findById(id).orElseThrow(
                 () -> new DataNotFoundException("hotel not found!")
         );
 
+
         if(name != null){
             hotel.setName(name);
         }
-        if(country != null){
-            hotel.setCountry(country);
+        if(countryId != null){
+            Country byId = countryRepository.findById(countryId).orElseThrow(
+                    () -> new DataNotFoundException("Country not found")
+            );
+            hotel.setCountry(byId);
         }
         if(category != null){
             hotel.setCategory(category);
         }
         if(image != null){
-            hotel.setImage(image);
+            hotel.setImageUrl(image);
         }
 
         hotelRepository.save(hotel);
@@ -85,7 +88,7 @@ public class HotelService {
         Hotel hotel = hotelRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Hotel not found with id: " + id));
 
-        hotel.setImage(imageUrl);
+        hotel.setImageUrl(imageUrl);
         hotelRepository.save(hotel);
     }
 

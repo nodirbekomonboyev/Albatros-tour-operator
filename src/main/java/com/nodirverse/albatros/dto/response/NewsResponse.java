@@ -11,7 +11,6 @@ public class NewsResponse {
     private UUID id;
     private String title;
     private String text;
-    private String image;
+    private String imageUrl;
     private String link;
-    private String content;
 }

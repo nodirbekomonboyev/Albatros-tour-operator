@@ -39,7 +39,7 @@ public class CountryService {
     }
 
 
-    public String update(UUID id, String name, String city, String picture, Boolean isSeasonal) {
+    public String update(UUID id, String name, String city, Boolean isSeasonal) {
         Country country = countryRepository.findById(id).orElseThrow(
                 () -> new DataNotFoundException("country not found!")
         );
@@ -49,9 +49,6 @@ public class CountryService {
         }
         if(country != null){
             country.setCity(city);
-        }
-        if(picture != null){
-            country.setPicture(picture);
         }
         if(isSeasonal != null){
             country.setIsSeasonal(isSeasonal);
@@ -74,5 +71,19 @@ public class CountryService {
             list.add(countryResponse);
         });
         return list;
+    }
+
+    public void updateImageUrl(UUID id, String imageUrl) {
+        Country country = countryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Country not found with id: " + id));
+
+        country.setImageUrl(imageUrl);
+        countryRepository.save(country);
+    }
+
+    public Country getCountryById(UUID id) {
+        return countryRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Country not found with id: " + id)
+        );
     }
 }

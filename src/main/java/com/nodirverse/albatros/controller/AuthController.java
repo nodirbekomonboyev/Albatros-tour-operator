@@ -67,14 +67,6 @@ public class AuthController {
                 .build());
     }
 
-    private String getClientIP(HttpServletRequest request) {
-        String xfHeader = request.getHeader("X-Forwarded-For");
-        if (xfHeader == null) {
-            return request.getRemoteAddr();
-        }
-        return xfHeader.split(",")[0];
-    }
-
     @PostMapping("/refresh-token")
     public ResponseEntity<ApiResponse<JwtResponse>> refreshToken(@Valid @RequestBody TokenRefreshRequest request) {
         return ResponseEntity.ok(ApiResponse.<JwtResponse>builder()
@@ -82,5 +74,13 @@ public class AuthController {
                 .message("Token refreshed successfully")
                 .data(userService.tokenRefresh(request))
                 .build());
+    }
+
+    private String getClientIP(HttpServletRequest request) {
+        String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null) {
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
     }
 }

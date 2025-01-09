@@ -16,6 +16,5 @@ public class HotelResponse {
     private String name;
     private Country country;
     private Category category;
-    private String image;
-    private Boolean isPremium;
+    private String imageUrl;
 }
